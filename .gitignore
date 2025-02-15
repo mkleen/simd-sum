@@ -1,0 +1,31 @@
+# OS files
+.DS_Store
+Icon\r\r
+.floo
+.flooignore
+*~
+
+# Java files
+.classpath
+.project
+.settings
+build/
+
+# intellij files
+.shelf/
+*.iml
+*.ipr
+*.iws
+build-idea/
+reports/
+test-output/
+.idea
+
+# Misc
+**/gen/
+target/
+*.factorypath
+.mvn/wrapper/maven-wrapper.jar
+pom.xml.versionsBackup
+
+.jqwik-database
