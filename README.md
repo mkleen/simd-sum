@@ -64,6 +64,7 @@ LongBenchmark.long_vec_mask            32768  avgt    5   3726.090 ±   3.199  n
 
 - AMD RYZEN 9 7950X
 - OpenJDK version "23" 2024-09-17
+- Linux groucho 6.12.11-1-MANJARO #1 SMP PREEMPT_DYNAMIC Thu, 23 Jan 2025 20:29:02 +0000 x86_64 GNU/Linux
 
 ## References:
 https://www.dag.inf.usi.ch/wp-content/uploads/cc23-slides.pdf
