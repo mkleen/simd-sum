@@ -19,7 +19,7 @@ public class LongSum {
 
     static void checkSize(VectorSpecies<?> vectorSpecies, int size) {
         if(size % vectorSpecies.length() > 0) {
-            throw new IllegalArgumentException("Data must be divisible by vector size");
+            throw new IllegalArgumentException("Data length must be divisible by vector size");
         }
     }
 
