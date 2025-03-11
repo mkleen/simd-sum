@@ -68,4 +68,5 @@ LongBenchmark.long_vec_mask            32768  avgt    5   3726.090 ±   3.199  n
 
 ## References:
 https://www.dag.inf.usi.ch/wp-content/uploads/cc23-slides.pdf
+
 https://www.jfokus.se/jfokus24-preso/Enter-the-Parallel-Universe-of-the-Vector-API.pdf
