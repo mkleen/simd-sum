@@ -1,12 +1,15 @@
 package simd.sum;
 
-import jdk.incubator.vector.DoubleVector;
 import jdk.incubator.vector.IntVector;
 import jdk.incubator.vector.VectorMask;
 import jdk.incubator.vector.VectorOperators;
 import jdk.incubator.vector.VectorSpecies;
 
+import static simd.sum.LongSum.checkSize;
+
 public class IntSum {
+
+    static final VectorSpecies<Integer> SPECIES_PREFERRED = IntVector.SPECIES_PREFERRED;
 
     public static long sum_scalar(int[] data) {
         int sum = 0;
@@ -17,31 +20,31 @@ public class IntSum {
     }
 
     public static int sum_vec(int[] data) {
+        checkSize(SPECIES_PREFERRED, data.length);
         int sum = 0;
-        VectorSpecies<Integer> speciesPreferred = IntVector.SPECIES_PREFERRED;
-        for (int i = 0; i < data.length; i += speciesPreferred.length()) {
-            IntVector v = IntVector.fromArray(speciesPreferred, data, i);
+        for (int i = 0; i < data.length; i += SPECIES_PREFERRED.length()) {
+            IntVector v = IntVector.fromArray(SPECIES_PREFERRED, data, i);
             sum += v.reduceLanes(VectorOperators.ADD);
         }
         return sum;
     }
 
     public static int sum_vec_mask(int[] data) {
+        checkSize(SPECIES_PREFERRED, data.length);
         int sum = 0;
-        VectorSpecies<Integer> speciesPreferred = IntVector.SPECIES_PREFERRED;
-        for (int i = 0; i < data.length; i += speciesPreferred.length()) {
-            VectorMask<Integer> mask = speciesPreferred.indexInRange(i, data.length);
-            IntVector v = IntVector.fromArray(speciesPreferred, data, i, mask);
+        for (int i = 0; i < data.length; i += SPECIES_PREFERRED.length()) {
+            VectorMask<Integer> mask = SPECIES_PREFERRED.indexInRange(i, data.length);
+            IntVector v = IntVector.fromArray(SPECIES_PREFERRED, data, i, mask);
             sum += v.reduceLanes(VectorOperators.ADD, mask);
         }
         return sum;
     }
 
     public static int sum_vec_acc(int[] data) {
-        VectorSpecies<Integer> speciesPreferred = IntVector.SPECIES_PREFERRED;
-        IntVector acc = IntVector.zero(speciesPreferred);
-        for (int i = 0; i < data.length; i += speciesPreferred.length()) {
-            IntVector dv = IntVector.fromArray(speciesPreferred, data, i);
+        checkSize(SPECIES_PREFERRED, data.length);
+        IntVector acc = IntVector.zero(SPECIES_PREFERRED);
+        for (int i = 0; i < data.length; i += SPECIES_PREFERRED.length()) {
+            IntVector dv = IntVector.fromArray(SPECIES_PREFERRED, data, i);
             acc = acc.add(dv);
         }
         return acc.reduceLanes(VectorOperators.ADD);
